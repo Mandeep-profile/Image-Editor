@@ -2,10 +2,9 @@ import { useState } from "react";
 import { API_Key } from "../Utils/Constants";
 import "./Search.css";
 
-const Search = () => {
+const Search = ({handleOpenImage}) => {
   const [searchItem, setSearchItem] = useState("");
   const [images, setImages] = useState([]);
-  const [selectedImage, setSelectedImage] = useState();
 
   const getImages = async (searchItem) => {
     try {
@@ -16,7 +15,6 @@ const Search = () => {
       const data = await response.json();
       setImages(data.photos);
       setSearchItem("");
-      console.log(data);
     } catch (error) {
       console.log("No data found", error);
     }
@@ -26,11 +24,14 @@ const Search = () => {
     getImages(searchItem);
   };
 
-  const handleOpenImage = (imgUrl) => {
-    setSelectedImage(imgUrl);
-  };
   return (
+    <>
+    <div className="detail-div">
+       <h4>Name : Mandeep Singh</h4>
+       <p>Mandeepsinghworkspace@gmail.com</p>
+    </div>
     <div className="search-main">
+      <h2 className="title-page">Search Page</h2>
       <input
         type="text"
         placeholder="Enter Image Title"
@@ -61,6 +62,7 @@ const Search = () => {
         ))}
       </div>
     </div>
+    </>
   );
 };
 
